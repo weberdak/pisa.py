@@ -1,0 +1,18 @@
+python ../../pisa.py \
+       -t 35.0 \
+       -r -10.0 \
+       -o 1.0 \
+       --nres 18 \
+       --seq_start 0 \
+       --rho_start 0 \
+       --phi -65 \
+       --psi -40 \
+       --aCaCN 115.0 \
+       --aCNCa 121.0 \
+       --aNCaC 110.0 \
+       --aCaNH 117.0 \
+       --bCaC 1.53 \
+       --bCN 1.34 \
+       --pas 31 55 202 \
+       --out_wave denny_wave.dat \
+       --out_log denny_log.dat

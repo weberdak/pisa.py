@@ -1,0 +1,46 @@
+# The following geometric parameters will be used:
+# --aCaCN 115.0
+# --aCNCa 121.0
+# --aNCaC 110.0
+# --aCaNH 117.0
+# --bCaC 1.53
+# --bCN 1.34
+# --bNCa 1.45
+# --phi -65.0
+# --psi -40.0
+# --beta 17.0
+# --period 3.6
+# Neither --seq or --peaks specified. Generating 18 residues.
+# Sequence starts at residue: 0
+# Rho indices referenced to residue: 0
+# Computed Matrix A as:
+# [-0.82793018  0.55346557 -0.09059512]
+# [ 0.55930483  0.80292318 -0.20613702]
+# [-0.04134882 -0.22133735 -0.9743203 ]
+# Simulating PISA wheel with the following parameters:
+# --flip 0.0
+# --dc 10.735
+# --pas [31.0, 55.0, 202.0]
+# --tau 35.00
+# --rho0 -10.00
+# --order 1.00
+# resname, index, rho, shift_calc, coupling_calc, shift_exp, coupling_exp, score, shift_raw, coupling_raw
+0 0 350.00 140.389 8.832 nan nan 0.000 nan nan
+1 1 250.00 120.070 2.587 nan nan 0.000 nan nan
+2 2 150.00 153.087 1.633 nan nan 0.000 nan nan
+3 3 50.00 176.450 7.987 nan nan 0.000 nan nan
+4 4 310.00 121.079 6.732 nan nan 0.000 nan nan
+5 5 210.00 129.200 1.039 nan nan 0.000 nan nan
+6 6 110.00 172.961 3.850 nan nan 0.000 nan nan
+7 7 10.00 153.909 9.134 nan nan 0.000 nan nan
+8 8 270.00 117.538 3.844 nan nan 0.000 nan nan
+9 9 170.00 143.504 1.041 nan nan 0.000 nan nan
+10 10 70.00 180.830 6.738 nan nan 0.000 nan nan
+11 11 330.00 128.873 7.982 nan nan 0.000 nan nan
+12 12 230.00 124.100 1.630 nan nan 0.000 nan nan
+13 13 130.00 163.474 2.591 nan nan 0.000 nan nan
+14 14 30.00 166.828 8.834 nan nan 0.000 nan nan
+15 15 290.00 117.499 5.284 nan nan 0.000 nan nan
+16 16 190.00 135.543 0.841 nan nan 0.000 nan nan
+17 17 90.00 179.377 5.290 nan nan 0.000 nan nan
+# Writing interpolated wave data to: denny_wave.dat
