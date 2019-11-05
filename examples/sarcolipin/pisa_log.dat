@@ -1,0 +1,88 @@
+# The following geometric parameters will be used:
+# --aCaCN 117.5
+# --aCNCa 124.0
+# --aNCaC 107.4
+# --aCaNH 116.0
+# --bCaC 1.52
+# --bCN 1.35
+# --bNCa 1.45
+# --phi -63.0
+# --psi -42.0
+# --beta 17.0
+# --period 3.6
+# Importing sequence and data from file: peaks.dat
+# Rho indices referenced to residue: 6
+# Computed Matrix A as:
+# [-0.82014914  0.56247172 -0.10479004]
+# [ 0.57177312  0.79910047 -0.1857793 ]
+# [-0.02075784 -0.21228286 -0.97698777]
+# Exploring combinations of tau, rho0 and order for best fit to peak list.
+# --fit_tau [20.0, 30.0, 0.1]
+# --fit_rho0 [30.0, 50.0, 1.0]
+# --fit_order [0.8, 1.0, 0.025]
+# 102 values of tau will be tested.
+# 21 values of rho0 will be tested.
+# 9 values of order parameters be tested.
+# A total of 19278 combinations will be tested.
+# --fit_exclude [1, 3, 6, 7, 8, 9, 10, 11, 12, 13, 28, 29, 31]
+# Performing error analysis using 20 replicates with 1.2 ppm and 0.3 kHz linewidths.
+# Replicate 1: tau = 25.70, rho0 = 41.00, ord = 0.90, score = 62.694
+# Replicate 2: tau = 23.10, rho0 = 43.00, ord = 0.88, score = 62.012
+# Replicate 3: tau = 26.70, rho0 = 40.00, ord = 0.93, score = 50.518
+# Replicate 4: tau = 24.00, rho0 = 46.00, ord = 0.85, score = 63.063
+# Replicate 5: tau = 24.70, rho0 = 47.00, ord = 0.88, score = 70.674
+# Replicate 6: tau = 25.30, rho0 = 39.00, ord = 0.90, score = 67.582
+# Replicate 7: tau = 25.80, rho0 = 39.00, ord = 0.93, score = 55.963
+# Replicate 8: tau = 23.30, rho0 = 42.00, ord = 0.88, score = 64.179
+# Replicate 9: tau = 24.00, rho0 = 43.00, ord = 0.88, score = 62.665
+# Replicate 10: tau = 24.00, rho0 = 39.00, ord = 0.88, score = 46.337
+# Replicate 11: tau = 25.00, rho0 = 33.00, ord = 0.90, score = 57.749
+# Replicate 12: tau = 26.80, rho0 = 38.00, ord = 0.93, score = 66.306
+# Replicate 13: tau = 23.80, rho0 = 36.00, ord = 0.85, score = 44.831
+# Replicate 14: tau = 25.80, rho0 = 41.00, ord = 0.90, score = 58.891
+# Replicate 15: tau = 26.10, rho0 = 32.00, ord = 0.93, score = 66.285
+# Replicate 16: tau = 25.10, rho0 = 36.00, ord = 0.90, score = 47.077
+# Replicate 17: tau = 26.40, rho0 = 42.00, ord = 0.90, score = 67.859
+# Replicate 18: tau = 25.20, rho0 = 43.00, ord = 0.90, score = 51.325
+# Replicate 19: tau = 26.20, rho0 = 32.00, ord = 0.93, score = 53.661
+# Replicate 20: tau = 26.00, rho0 = 43.00, ord = 0.93, score = 68.379
+# Average tau: 25.15 +/- 1.10
+# Average rho0: 39.75 +/- 4.16
+# Average ord: 0.90 +/- 0.02
+# Fitting completed in 11.40 minutes.
+# Simulating PISA wheel with the following parameters:
+# --flip 90.0
+# --dc 10.735
+# --pas (57.3, 81.2, 228.1)
+# --tau 25.15
+# --rho0 39.75
+# --order 0.90
+# resname, index, rho, shift_calc, coupling_calc, shift_exp, coupling_exp, score, shift_raw, coupling_raw
+M1 -5 179.75 90.758 1.798 126.676 0.794 45.955 112.212 1.772
+I3 -3 339.75 94.453 4.402 134.664 1.335 70.886 94.386 2.979
+R6 0 39.75 81.779 4.367 99.881 3.158 30.192 172.005 7.047
+E7 1 299.75 99.758 3.623 109.131 2.053 25.069 151.364 4.581
+L8 2 199.75 93.753 1.807 94.855 0.963 9.546 183.221 2.149
+F9 3 99.75 78.832 3.068 81.614 2.595 7.513 212.768 5.791
+L10 4 359.75 90.218 4.578 103.259 3.717 21.648 164.467 8.295
+N11 5 259.75 99.839 2.658 104.258 2.173 9.273 162.238 4.849
+F12 6 159.75 87.442 1.936 86.422 1.807 2.306 202.039 4.032
+T13 7 59.75 79.093 4.014 79.390 3.923 1.210 217.731 8.754
+I14 8 319.75 97.760 4.067 103.259 3.717 9.000 164.467 8.295
+V15 9 219.75 96.324 1.964 96.665 1.933 0.651 179.182 4.314
+L16 10 119.75 80.990 2.601 78.542 2.731 3.748 219.624 6.094
+I17 11 19.75 85.725 4.565 84.529 4.475 2.099 206.264 9.986
+T18 12 279.75 100.387 3.132 99.881 3.158 0.768 172.005 7.047
+V19 13 179.75 90.758 1.798 89.264 1.864 2.157 195.697 4.160
+I20 14 79.75 78.096 3.560 77.627 3.522 0.849 221.666 7.859
+L21 15 339.75 94.453 4.402 94.637 4.450 0.660 183.707 9.930
+M22 16 239.75 98.401 2.256 97.831 2.529 3.301 176.580 5.644
+W23 17 139.75 84.044 2.211 84.921 2.194 1.047 205.389 4.896
+L24 18 39.75 81.779 4.367 81.734 3.990 3.815 212.501 8.904
+L25 19 299.75 99.758 3.623 103.259 3.717 4.446 164.467 8.295
+V26 20 199.75 93.753 1.807 93.796 1.986 1.829 185.584 4.432
+R27 21 99.75 78.832 3.068 78.542 2.731 3.662 219.624 6.094
+S28 22 359.75 90.218 4.578 84.620 3.933 12.045 206.061 8.777
+Y29 23 259.75 99.839 2.658 110.499 1.315 24.094 148.311 2.934
+Y31 25 59.75 79.093 4.014 113.374 1.109 63.334 141.895 2.475
+# Writing interpolated wave data to: pisa_wave.dat
