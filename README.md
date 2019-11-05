@@ -41,7 +41,7 @@ Or run as a bash script [denny.sh](examples/denny/denny.sh) by:
 
 	bash denny.sh
 
-The results contained in the log ([denny_log.dat](examples/denny/denny_wave.dat)) and wave ([denny_wave.dat](examples/denny/denny_log.dat)) files can be visualized using the Matplotlib Python library. This script ([denny_plot.py](examples/denny/denny_plot.py)) will plot the PISA wheel:
+The results contained in the log ([denny_log.dat](examples/denny/denny_log.dat)) and wave ([denny_wave.dat](examples/denny/denny_wave.dat)) files can be visualized using the Matplotlib Python library. This script ([denny_plot.py](examples/denny/denny_plot.py)) will plot the PISA wheel:
 
 	python denny_plot.py
 
