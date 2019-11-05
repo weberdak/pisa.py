@@ -2,6 +2,11 @@
 
 A python tool for simulating and fitting PISA wheels to oriented solid-state NMR data.
 
+### Citation
+
+Manuscript in preparation.
+
+
 ### Installation
 
 #### Python 3
