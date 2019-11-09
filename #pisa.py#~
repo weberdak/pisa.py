@@ -7,8 +7,8 @@ import itertools
 import argparse
 import time
 import random
-import os
-
+from threading import Thread
+from queue import Queue
 
 def initData():
     df = pd.DataFrame({'resname': [], 'rho': [], 'shift_exp': [], 
@@ -365,7 +365,7 @@ def randomizeShiftsCouplings(df,lw_shifts,lw_couplings):
     return df
 
 
-def explore_comb(df,period,flip,pas,beta,dc,matrixA,scalar,comb,verbose=True):
+def explore_comb(df,period,flip,pas,beta,dc,matrixA,scalar,comb):
     '''Explore combinations of tau, rho0 and order for lowest fit score.
     
     Parameters
@@ -374,8 +374,6 @@ def explore_comb(df,period,flip,pas,beta,dc,matrixA,scalar,comb,verbose=True):
         An initialized dataframe for sequence.
     comb: list of list of floats
         Combinations of [tau,rho0,order] to be tested.
-    verbose: Bool
-        Report progress.
     flip, pas, beta, dc, matrixA, scalar
         See calcShiftCoupling()
     
@@ -391,46 +389,14 @@ def explore_comb(df,period,flip,pas,beta,dc,matrixA,scalar,comb,verbose=True):
         sim = calcWheel(df,t*0.017453,r,period,o,flip,pas,beta,dc,matrixA)
         df_t, score = calcScores(sim,scalar)
         results.append((t,r,o,score))
-        if verbose:
-            c+=1
-            print('# Progress {0:.2f}%'.format(100*c/ncomb), end='\r')
-    if verbose:
-        print('')
+        c+=1
+        print('# Progress {0:.2f}%'.format(100*c/ncomb), end='\r')
+    print('')
     return results
 
 
-### THREADING
-
-def chunks(l, n):
-    """Yield successive n-sized chunks from l. From stackoverflow 312443"""
-    for i in range(0, len(l), n):
-        yield l[i:i + n]
-
-
-def explore_comb_multiproc(df,period,flip,pas,beta,dc,matrixA,scalar,comb,procs=2):
-    """Parallel version of explore_comb.
-
-    Parameters
-    ----------
-    df, period, flip, pas, beta, dc, matrixA, scalar, comb
-       See explore_comb()
-    processors: int
-       Number of CPUs to use
-    """
-    import concurrent.futures
-    ncomb = len(comb)
-    chunk_size = int(ncomb/(procs*10))
-    ncomb_chunks = chunks(comb,chunk_size)
-    results = []
-    with concurrent.futures.ProcessPoolExecutor(max_workers=procs) as executor:
-        future_to_result = { executor.submit(explore_comb,df,period,flip,pas,beta,dc,matrixA,scalar,l,verbose=False): l for l in ncomb_chunks }
-        for future in concurrent.futures.as_completed(future_to_result):
-            results = results + future.result()
-            complete = len(results)
-            print('# Progress {0:.2f}%'.format(100*complete/ncomb), end='\r')
-    return results
-
-### END THREADING
+def explore_comb_threads():
+    return
 
 
 def quickfit_comb(minShift,maxShift,minCoupling,maxCoupling,rho0,period,flip,pas,beta,dc,matrixA,scalar,comb):
@@ -734,12 +700,6 @@ def parse_args():
         help='Error analysis. Specify three numbers: number of replicates (int),  average linewidth of CS (ppm) and average linewidth of DC (kHz).',
         default=[]
     )
-    # Default adheres to max_workers defults in concurrent.future library.
-    parser.add_argument(
-        '--procs', type=int,
-        help='Number of CPUs (maximum available). No more than 32.',
-        default=min(32, os.cpu_count() + 4)
-    )
     args = parser.parse_args()
     return args
 
@@ -757,7 +717,6 @@ def main():
     negative_dc = args.negative_dc
 
     # Handle fitting arguments
-    procs = args.procs
     fit_tau = args.fit_tau
     fit_rho0 = args.fit_rho0
     fit_order = args.fit_order
@@ -868,8 +827,6 @@ def main():
         log('# {} values of rho0 will be tested.'.format(len(rhos)),f)
         log('# {} values of order parameters be tested.'.format(len(ords)),f)
         log('# A total of {} combinations will be tested.'.format(ncomb),f)
-        log('# {} CPUs will be used.'.format(procs),f)
-        
         if fit_exclude:
             assert (not fit_only), 'Cannot use --fit_exclude and --fit_only flags together!'
             log('# --fit_exclude {}'.format(fit_exclude),f)
@@ -894,10 +851,7 @@ def main():
             while replicate <= num_replicates:
                 df_err = df_fit.copy()
                 df_err = randomizeShiftsCouplings(df_err,lw_shifts,lw_couplings)
-                if procs > 1:
-                    results = explore_comb_multiproc(df_err,period,flip,pas,beta,dc,matrixA,scalar,comb,procs=procs)
-                else:
-                    results = explore_comb(df_err,period,flip,pas,beta,dc,matrixA,scalar,comb)
+                results = explore_comb(df_err,period,flip,pas,beta,dc,matrixA,scalar,comb)
                 min_score = 100000
                 for t,r,o,s in results:
                      if s < min_score:
@@ -925,10 +879,7 @@ def main():
 
         # Or just fit directly to data
         else:
-            if procs > 1:
-                results = explore_comb_multiproc(df_fit,period,flip,pas,beta,dc,matrixA,scalar,comb,procs)
-            else:
-                results = explore_comb(df_fit,period,flip,pas,beta,dc,matrixA,scalar,comb)
+            results = explore_comb(df_fit,period,flip,pas,beta,dc,matrixA,scalar,comb)
             log('# Writing score for each combination to: {}'.format(out_fit),f)
             f_fit = open(out_fit, 'w')
             f_fit.write('# tau rho ord score\n')
