@@ -696,8 +696,8 @@ def parse_args():
     )
     parser.add_argument(
         '--fit_order', type=float, nargs='+',
-        help='Min., max. and step to fit order parameter (0.85 0.85 0.1).',
-        default=(0.85, 0.85, 0.1)
+        help='Min., max. and step to fit order parameter (0.80 0.90 0.05).',
+        default=(0.80, 0.90, 0.05)
     )
     parser.add_argument(
         '--scalar', type=float,
