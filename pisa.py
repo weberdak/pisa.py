@@ -960,7 +960,7 @@ def main():
             order = min_ord
 
         time_stop = time.time()
-        log('# Fitting completed in {0:.2f} minutes.'.format((time_stop-time_start)/60),f)
+        log('# Fitting completed in {0:.2f} minutes ({1:.2f} seconds).'.format((time_stop-time_start)/60,time_stop-time_start),f)
 
         
     # Explore combinations of tau and order for best fit to minimum and maximum bounds (--quickfit)
