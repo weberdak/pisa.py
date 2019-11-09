@@ -652,7 +652,7 @@ def parse_args():
     parser.add_argument(
         '--aCaNH', type=float,
         help='Angle of Ca-N-H in degrees (114.7).',
-        default=114.7
+        default=116.0
     )
     parser.add_argument(
         '--bCaC', type=float,
@@ -686,18 +686,18 @@ def parse_args():
     )
     parser.add_argument(
         '--fit_tau', type=float, nargs='+',
-        help='Min., max. and step to fit tilt angle (0.0 90.0 2.0).',
-        default=(0.0,90.0,2.0)
+        help='Min., max. and step to fit tilt angle (0.0 90.0 1.0).',
+        default=(0.0,90.0,1.0)
     )
     parser.add_argument(
         '--fit_rho0', type=float, nargs='+',
-        help='Min., max. and step to fit azimuthal angle (0.0 360.0 5.0).',
-        default=(0.0,360.0,5.0)
+        help='Min., max. and step to fit azimuthal angle (0.0 360.0 4.0).',
+        default=(0.0,360.0,4.0)
     )
     parser.add_argument(
         '--fit_order', type=float, nargs='+',
-        help='Min., max. and step to fit order parameter (0.0 1.0 0.1).',
-        default=(0.0,1.0,0.1)
+        help='Min., max. and step to fit order parameter (0.85 0.85 0.1).',
+        default=(0.85, 0.85, 0.1)
     )
     parser.add_argument(
         '--scalar', type=float,
