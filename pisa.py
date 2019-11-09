@@ -880,10 +880,20 @@ def main():
             df_fit = filterData(df,fit_exclude,rho_start,exclude=False,include=True)
         else:
             df_fit = df
-        log_residues = [ i for i in df_fit['resname'] ]
-        #log('# Residues to fit: {}'.format(log_residues),f)
-        time_start = time.time()
 
+        # Report which residues will be used for scoring. Exclude residues missing assignments.
+        log_residues = []
+        for index in df_fit.index.values:
+            check = 0
+            if not pd.isnull(df_fit.at[index,'shift_exp']):
+                 check+=1
+            if not pd.isnull(df_fit.at[index,'coupling_exp']):
+                 check+=1
+            if check > 0:
+                log_residues.append(df_fit.at[index,'resname'])
+        log('# Residues to fit: {}'.format(log_residues),f)
+
+        time_start = time.time()
         # Perform error analysis if specified.
         if args.errors:
             log('# Performing error analysis using {} replicates with {} ppm and {} kHz linewidths.'.format(num_replicates,lw_shifts,lw_couplings),f)

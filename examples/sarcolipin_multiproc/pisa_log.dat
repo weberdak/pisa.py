@@ -10,6 +10,9 @@
 # --psi -42.0
 # --beta 17.0
 # --period 3.6
+# Importing sequence: MGINTRELFLNFTIVLITVILMWLLVRSYQY
+# Sequence starts at residue: 1
+# Rho indices referenced to residue: 6
 # Importing sequence and data from file: assignments.dat
 # Rho indices referenced to residue: 6
 # Computed Matrix A as:
@@ -26,12 +29,13 @@
 # A total of 8281 combinations will be tested.
 # 8 CPUs will be used.
 # --fit_exclude [1, 3, 6, 7, 8, 9, 10, 11, 12, 13, 28, 29, 31]
+# Residues to fit: ['I14', 'V15', 'L16', 'I17', 'T18', 'V19', 'I20', 'L21', 'M22', 'W23', 'L24', 'L25', 'V26', 'R27']
 # Writing score for each combination to: pisa_fit.dat
 # Minimum score: 44.264
 # Fitted tau: 23.000
 # Fitted rho0: 44.000
 # Fitted order: 0.850
-# Fitting completed in 0.07 minutes.
+# Fitting completed in 0.08 minutes.
 # Simulating PISA wheel with the following parameters:
 # --flip 90.0
 # --dc 10.735
@@ -41,7 +45,10 @@
 # --order 0.85
 # resname, index, rho, shift_calc, coupling_calc, shift_exp, coupling_exp, score, shift_raw, coupling_raw
 M1 -5 184.00 91.115 1.947 126.676 0.794 47.086 111.668 1.868
+G2 -4 84.00 79.418 3.434 nan nan 0.000 nan nan
 I3 -3 344.00 93.006 4.313 134.664 1.335 71.435 92.873 3.141
+N4 -2 244.00 97.760 2.436 nan nan 0.000 nan nan
+T5 -1 144.00 85.147 2.265 nan nan 0.000 nan nan
 R6 0 44.00 82.063 4.180 99.881 3.158 28.040 174.715 7.431
 E7 1 304.00 98.215 3.669 109.131 2.053 27.078 152.951 4.831
 L8 2 204.00 93.761 1.984 94.855 0.963 11.301 186.541 2.266
@@ -66,5 +73,6 @@ V26 20 204.00 93.761 1.984 93.796 1.986 0.058 189.033 4.673
 R27 21 104.00 80.312 2.998 78.542 2.731 4.441 224.925 6.426
 S28 22 4.00 89.192 4.433 84.620 3.933 9.569 210.624 9.254
 Y29 23 264.00 98.860 2.811 110.499 1.315 26.603 149.732 3.094
+Q30 24 164.00 88.176 2.043 nan nan 0.000 nan nan
 Y31 25 64.00 79.995 3.846 113.374 1.109 60.753 142.967 2.609
 # Writing interpolated wave data to: pisa_wave.dat
