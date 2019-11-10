@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 
-# Version 1.0
-# Last revision Nov 10 2019
+VERSION='1.0'
+REVISION='Nov 10 2019'
+
 
 import pandas as pd
 import numpy as np
@@ -803,6 +804,9 @@ def main():
     
     # Initialize log file and log parameters
     f = open(out_log, 'w')
+    log('# Job executed using pisa.py',f)
+    log('# Version: {}'.format(VERSION),f)
+    log('# Last revision: {}'.format(REVISION),f)
     log('# The following geometric parameters will be used:',f)
     log('# --aCaCN {}'.format(aCaCN),f)
     log('# --aCNCa {}'.format(aCNCa),f)
