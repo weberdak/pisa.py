@@ -11,7 +11,7 @@ import itertools
 import argparse
 import time
 import random
-import os
+import multiprocessing
 import concurrent.futures
 
 
@@ -738,11 +738,10 @@ def parse_args():
         help='Error analysis. Specify three numbers: number of replicates (int),  average linewidth of CS (ppm) and average linewidth of DC (kHz).',
         default=[]
     )
-    # Default adheres to max_workers defults in concurrent.future library.
     parser.add_argument(
         '--procs', type=int,
-        help='Number of CPUs (maximum available). No more than 32.',
-        default=min(32, os.cpu_count() + 4)
+        help='Number of CPUs (1/4 of total available).',
+        default=min(multiprocessing.cpu_count()/4,1)
     )
     args = parser.parse_args()
     return args
