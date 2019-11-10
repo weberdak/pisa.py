@@ -120,6 +120,7 @@ def filterData(df,resnums,rho_start,exclude=False,include=False):
         remove = [ i-rho_start for i in resnums ]
     if include:
         keep = [ i-rho_start for i in resnums ]
+        print(keep)
         remove = []
         for i in df.index.values:
             if i not in keep:
@@ -883,7 +884,7 @@ def main():
         elif fit_only:
             assert (not fit_exclude), 'Cannot use --fit_exclude and --fit_only flags together!'
             log('# --fit_only {}'.format(fit_only),f)
-            df_fit = filterData(df,fit_exclude,rho_start,exclude=False,include=True)
+            df_fit = filterData(df,fit_only,rho_start,exclude=False,include=True)
         else:
             df_fit = df
 
