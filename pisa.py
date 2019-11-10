@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 
+# Version 1.0
+# Last revision Nov 10 2019
+
 import pandas as pd
 import numpy as np
 import math
@@ -8,6 +11,7 @@ import argparse
 import time
 import random
 import os
+import concurrent.futures
 
 
 def initData():
@@ -417,7 +421,6 @@ def explore_comb_multiproc(df,period,flip,pas,beta,dc,matrixA,scalar,comb,procs=
     processors: int
        Number of CPUs to use
     """
-    import concurrent.futures
     ncomb = len(comb)
     chunk_size = int(ncomb/(procs*10))
     ncomb_chunks = chunks(comb,chunk_size)
@@ -651,7 +654,7 @@ def parse_args():
     )
     parser.add_argument(
         '--aCaNH', type=float,
-        help='Angle of Ca-N-H in degrees (114.7).',
+        help='Angle of Ca-N-H in degrees (116.0).',
         default=116.0
     )
     parser.add_argument(
@@ -696,8 +699,8 @@ def parse_args():
     )
     parser.add_argument(
         '--fit_order', type=float, nargs='+',
-        help='Min., max. and step to fit order parameter (0.80 0.90 0.05).',
-        default=(0.80, 0.90, 0.05)
+        help='Min., max. and step to fit order parameter (0.85 0.85 0.1).',
+        default=(0.85, 0.85, 0.1)
     )
     parser.add_argument(
         '--scalar', type=float,
