@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 VERSION='1.0'
-REVISION='Nov 10 2019'
+REVISION='Nov 11 2019'
 
 
 import pandas as pd
@@ -741,8 +741,8 @@ def parse_args():
     )
     parser.add_argument(
         '--procs', type=int,
-        help='Number of CPUs (1/4 of total available).',
-        default=min(multiprocessing.cpu_count()/4,1)
+        help='Number of CPUs (32).',
+        default=32
     )
     args = parser.parse_args()
     return args
