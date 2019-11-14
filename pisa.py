@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 VERSION='1.0'
-REVISION='Nov 13 2019'
+REVISION='Nov 14 2019'
 
 
 import pandas as pd
