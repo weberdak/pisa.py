@@ -752,6 +752,11 @@ def parse_args():
         default=[]
     )
     parser.add_argument(
+        '--show_only', type=int, nargs='+',
+        help='Display only these residues in the output files (none).',
+        default=[]
+    )
+    parser.add_argument(
         '--out_log', type=str,
         help='Filename to save log file with per-residue shifts and couplings (pisa_log.dat).',
         default='pisa_log.dat'
@@ -802,6 +807,7 @@ def main():
     quickfit = args.quickfit
     fit_only = args.fit_only
     fit_exclude = args.fit_exclude
+    show_only = args.show_only
     # TO DO: Fix this part to handle mis-entered values better.
     if len(args.errors) == 3:
         errors = True
@@ -1088,32 +1094,38 @@ def main():
         log('# All dipolar couplings will be output as negative values.',f)
     
     # Write final results to log file
+    if show_only:
+        log('# --show_only specified. Outputting data only for residues {}'.format(show_only),f)
+        df_out = filterData(df,show_only,rho_start,exclude=False,include=True)
+    else:
+        df_out = df
+        
     log('# resname, index, rho, shift_calc, coupling_calc, shift_exp, coupling_exp, score, shift_raw, coupling_raw', f)
-    for index in df.index.values:
+    for index in df_out.index.values:
         if negative_dc:
-            coupling_calc = df.at[index,'coupling_calc'] * -1
-            coupling_exp = df.at[index,'coupling_exp'] * -1
+            coupling_calc = df_out.at[index,'coupling_calc'] * -1
+            coupling_exp = df_out.at[index,'coupling_exp'] * -1
         else:
-            coupling_calc = df.at[index,'coupling_calc']
-            coupling_exp = df.at[index,'coupling_exp']
+            coupling_calc = df_out.at[index,'coupling_calc']
+            coupling_exp = df_out.at[index,'coupling_exp']
         log('{0} {1} {2:.2f} {3:.3f} {4:.3f} {5:.3f} {6:.3f} {7:.3f} {8:.3f} {9:.3f}'.format(
-            df.at[index,'resname'],
+            df_out.at[index,'resname'],
             index,
-            df.at[index,'rho'],
-            df.at[index,'shift_calc'],
+            df_out.at[index,'rho'],
+            df_out.at[index,'shift_calc'],
             coupling_calc,
-            df.at[index,'shift_exp'],
+            df_out.at[index,'shift_exp'],
             coupling_exp,
-            df.at[index,'score'],
-            df.at[index,'shift_raw'],
-            df.at[index,'coupling_raw']
+            df_out.at[index,'score'],
+            df_out.at[index,'shift_raw'],
+            df_out.at[index,'coupling_raw']
             ),f)
     #log('# Final fitting score: {}'.format(score),f)
 
     # Write wave file
     log('# Writing interpolated wave data to: {}'.format(out_wave),f)
     wf = open(out_wave, 'w')
-    wave = calcWave(df,tau,rho0,period,order,flip,pas,beta,dc,rho_start,matrixA,margin=5.0,increment=0.1)
+    wave = calcWave(df_out,tau,rho0,period,order,flip,pas,beta,dc,rho_start,matrixA,margin=5.0,increment=0.1)
     for i in range(len(wave[0])):
         if negative_dc:
             coupling_wave = wave[3][i] * -1
