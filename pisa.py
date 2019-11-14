@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 VERSION='1.0'
-REVISION='Nov 11 2019'
+REVISION='Nov 13 2019'
 
 
 import pandas as pd
@@ -405,6 +405,57 @@ def explore_comb(df,period,flip,pas,beta,dc,matrixA,scalar,comb,verbose=True):
     return results
 
 
+def quickfit_comb(minShift,maxShift,minCouple,maxCouple,rho0,period,flip,pas,beta,dc,matrixA,scalar,comb,verbose=True):
+    '''Explore combinations of tau and oder for best fit to data. Ignores assignments.
+    
+    Parameters
+    ----------
+    minShift: float
+        Minimum experimental 15N shift (ppm).
+    maxShift: float
+        Maximum experimental 15N shift (ppm).
+    minCoupling: float
+        Minimum experimental 15N-1H dipolar coupling (kHz).
+    maxCoupling: float
+        Maximum experimental 15N-1H dipolar coupling (kHz).
+    rho0, period, flip, pas, beta, dc, matrixA, scalar
+        See calcShiftCoupling()
+    
+    Returns
+    -------
+    results: list of list of floats
+        [tau, order, score] for all combinations tested.
+    '''
+    ncomb = len(comb)
+    df = initData()
+    df = initFromSequence(df,'',18,1,1)
+    c = 0
+    results = []
+    for t,o in comb:
+        df_temp = calcWheel(df,t*0.017453,rho0,period,o,flip,pas,beta,dc,matrixA)
+        maxShift_calc = max(df_temp['shift_calc'])
+        minShift_calc = min(df_temp['shift_calc'])
+        maxCouple_calc = max(df_temp['coupling_calc'])
+        minCouple_calc = min(df_temp['coupling_calc'])
+        if minShift:
+            n_dev = np.sqrt((maxShift-maxShift_calc)**2 + (minShift-minShift_calc)**2)
+        else:
+            n_dev = 0
+        if minCouple:
+            nh_dev = scalar*np.sqrt((maxCouple-maxCouple_calc)**2 + (minCouple-minCouple_calc)**2)
+        else:
+            nh_dev = 0
+        score = n_dev + nh_dev
+        results.append((t,o,score))
+        if verbose:
+            c+=1
+            print('# Progress {0:.2f}%'.format(100*c/ncomb), end='\r')
+    if verbose:
+        print('')
+    return results
+
+
+
 ### THREADING
 
 def chunks(l, n):
@@ -435,49 +486,30 @@ def explore_comb_multiproc(df,period,flip,pas,beta,dc,matrixA,scalar,comb,procs=
             print('# Progress {0:.2f}%'.format(100*complete/ncomb), end='\r')
     return results
 
-### END THREADING
 
+def quickfit_comb_multiproc(minShift,maxShift,minCouple,maxCouple,rho0,period,flip,pas,beta,dc,matrixA,scalar,comb,procs=2):
+    """Parallel version of quickfit_comb.
 
-def quickfit_comb(minShift,maxShift,minCoupling,maxCoupling,rho0,period,flip,pas,beta,dc,matrixA,scalar,comb):
-    '''Explore combinations of tau and oder for best fit to data. Ignores assignments.
-    
     Parameters
     ----------
-    minShift: float
-        Minimum experimental 15N shift (ppm).
-    maxShift: float
-        Maximum experimental 15N shift (ppm).
-    minCoupling: float
-        Minimum experimental 15N-1H dipolar coupling (kHz).
-    maxCoupling: float
-        Maximum experimental 15N-1H dipolar coupling (kHz).
-    rho0, period, flip, pas, beta, dc, matrixA, scalar
-        See calcShiftCoupling()
-    
-    Returns
-    -------
-    results: list of list of floats
-        [tau, order, score] for all combinations tested.
-    '''
+    df, period, flip, pas, beta, dc, matrixA, scalar, comb
+       See explore_comb()
+    processors: int
+       Number of CPUs to use
+    """
     ncomb = len(comb)
-    df = initData()
-    df = initFromSequence(df,'',18,1,1)
-    c = 0
+    chunk_size = int(ncomb/(procs*10))
+    ncomb_chunks = chunks(comb,chunk_size)
     results = []
-    for t,o in comb:
-        df_temp = calcWheel(df,t*0.017453,rho0,period,o,flip,pas,beta,dc,matrixA)
-        maxShift_calc = max(df_temp['shift_calc'])
-        minShift_calc = min(df_temp['shift_calc'])
-        maxCoupling_calc = max(df_temp['coupling_calc'])
-        minCoupling_calc = min(df_temp['coupling_calc'])
-        n_dev = np.sqrt((maxShift-maxShift_calc)**2 + (minShift-minShift_calc)**2)
-        nh_dev = scalar*np.sqrt((maxCoupling-maxCoupling_calc)**2 + (minCoupling-minCoupling_calc)**2)
-        score = n_dev + nh_dev
-        results.append((t,o,score))
-        c += 1
-        print('# Progress {0:.2f}%'.format(100*c/ncomb), end='\r')
-    print('')
+    with concurrent.futures.ProcessPoolExecutor(max_workers=procs) as executor:
+        future_to_result = { executor.submit(quickfit_comb,minShift,maxShift,minCouple,maxCouple,rho0,period,flip,pas,beta,dc,matrixA,scalar,l,verbose=False): l for l in ncomb_chunks }
+        for future in concurrent.futures.as_completed(future_to_result):
+            results = results + future.result()
+            complete = len(results)
+            print('# Progress {0:.2f}%'.format(100*complete/ncomb), end='\r')
     return results
+
+### END THREADING
 
 
 def calcRaw(df,order,flip,pas):
@@ -680,8 +712,8 @@ def parse_args():
         default=''
     )
     parser.add_argument(
-        '--quickfit', type=float, nargs='+',
-        help='Explore combinations of tau and order for best fit.',
+        '--quickfit', nargs='+',
+        help='Min. shift, max. shift, min. couple, max. couple. Explore combinations of tau and order for best fit bounds.',
         default=[]
     )
     parser.add_argument(
@@ -862,6 +894,7 @@ def main():
 
     # Explore combinations of tau, rho0 and order for best fit to data
     if explore:
+        assert (not quickfit), 'Options --explore and --quickfit cannot be specified together!'
         taus = np.arange(fit_tau[0],fit_tau[1]+fit_tau[2],fit_tau[2])
         rhos = np.arange(fit_rho0[0],fit_rho0[1]+fit_rho0[2],fit_rho0[2])
         ords = np.arange(fit_order[0],fit_order[1]+fit_order[2],fit_order[2])
@@ -943,7 +976,7 @@ def main():
         # Or just fit directly to data
         else:
             if procs > 1:
-                results = explore_comb_multiproc(df_fit,period,flip,pas,beta,dc,matrixA,scalar,comb,procs)
+                results = explore_comb_multiproc(df_fit,period,flip,pas,beta,dc,matrixA,scalar,comb,procs=procs)
             else:
                 results = explore_comb(df_fit,period,flip,pas,beta,dc,matrixA,scalar,comb)
             log('# Writing score for each combination to: {}'.format(out_fit),f)
@@ -972,24 +1005,55 @@ def main():
         
     # Explore combinations of tau and order for best fit to minimum and maximum bounds (--quickfit)
     if quickfit:
-        minShift = quickfit[0]
-        maxShift = quickfit[1]
-        minCouple = quickfit[2]
-        maxCouple = quickfit[3]
+        
+        # Read minimum and maximum points if specified. Convert to positive values.
+        log('# Exploring combinations of tau and order for best fit to bounds specified.',f)
+        assert (len(quickfit) == 4), 'The quickfit option should contain 4 variables!'
+        if is_float(quickfit[0]):
+            minShift = np.absolute(float(quickfit[0]))
+            log('# Minimum chemical shift: {}.'.format(minShift),f)
+        else:
+            minShift = False
+            log('# Minimum chemical shift not assigned.',f)
+        if is_float(quickfit[1]):
+            maxShift = np.absolute(float(quickfit[1]))
+            log('# Maximum chemical shift: {}.'.format(maxShift),f)
+            assert (minShift), 'A minimum chemical shift must also be specified!'
+            assert (maxShift > minShift), 'The absolute maximum chemical shift must be greater than the absolute minimum shift.'
+        else:
+            maxShift = False
+            log('# Maximum chemical shift not assigned.',f)
+        if is_float(quickfit[2]):
+            minCouple = np.absolute(float(quickfit[2]))
+            log('# Minimum dipolar coupling: {}.'.format(minCouple),f)
+        else:
+            minCouple = False
+            log('# Minimum  dipolar coupling not assigned.',f)
+        if is_float(quickfit[3]):
+            maxCouple = np.absolute(float(quickfit[3]))
+            log('# Maximum dipolar coupling: {}.'.format(maxCouple),f)
+            assert (minCouple), 'A minimum dipolar coupling must also be specified!'
+            assert (maxCouple > minCouple), 'The absolute maximum chemical shift must be greater than the absolute minimum shift.'
+        else:
+            maxCouple = False
+            log('# Maximum dipolar coupling not assigned.',f)
+        
         taus = np.arange(fit_tau[0],fit_tau[1]+fit_tau[2],fit_tau[2])
         ords = np.arange(fit_order[0],fit_order[1]+fit_order[2],fit_order[2])
         comb = list(itertools.product(*[taus,ords]))
         ncomb = len(comb)
-        log('# Exploring combinations of tau and order for best fit bounds specified.',f)
-        log('# --fit_tau {0:.2f}'.format(fit_tau),f)
-        log('# --fit_order {0:.2f}'.format(fit_order),f)
+        log('# --fit_tau {}'.format(fit_tau),f)
+        log('# --fit_order {}'.format(fit_order),f)
         log('# {} values of tau will be tested.'.format(len(taus)),f)
         log('# {} values of order parameters be tested.'.format(len(ords)),f)
         log('# A total of {} combinations will be tested.'.format(ncomb),f)
         time_start = time.time()
-        results = quickfit_comb(minShift,maxShift,minCouple,maxCouple,rho0,period,flip,pas,beta,dc,matrixA,scalar,comb)
+        if procs > 1:
+            results = quickfit_comb_multiproc(minShift,maxShift,minCouple,maxCouple,rho0,period,flip,pas,beta,dc,matrixA,scalar,comb,procs=procs)
+        else:
+            results = quickfit_comb(minShift,maxShift,minCouple,maxCouple,rho0,period,flip,pas,beta,dc,matrixA,scalar,comb)
         time_stop = time.time()
-        log('# Fitting completed in {0:.2f} minutes.'.format((time_stop-time_start)/60),f)
+        log('# Fitting completed in {0:.2f} minutes ({1:.2f} seconds).'.format((time_stop-time_start)/60,time_stop-time_start),f)
         log('# Writing score for each combination to: {}'.format(out_fit),f)
         f_fit = open(out_fit, 'w')
         f_fit.write('# tau rho ord score\n')
