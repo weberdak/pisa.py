@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 VERSION='1.0'
-REVISION='Nov 14 2019'
+REVISION='Nov 17 2019'
 
 
 import pandas as pd
@@ -475,7 +475,7 @@ def explore_comb_multiproc(df,period,flip,pas,beta,dc,matrixA,scalar,comb,procs=
        Number of CPUs to use
     """
     ncomb = len(comb)
-    chunk_size = int(ncomb/(procs*10))
+    chunk_size = int(ncomb/(procs))
     ncomb_chunks = chunks(comb,chunk_size)
     results = []
     with concurrent.futures.ProcessPoolExecutor(max_workers=procs) as executor:
@@ -498,7 +498,7 @@ def quickfit_comb_multiproc(minShift,maxShift,minCouple,maxCouple,rho0,period,fl
        Number of CPUs to use
     """
     ncomb = len(comb)
-    chunk_size = int(ncomb/(procs*10))
+    chunk_size = int(ncomb/(procs))
     ncomb_chunks = chunks(comb,chunk_size)
     results = []
     with concurrent.futures.ProcessPoolExecutor(max_workers=procs) as executor:

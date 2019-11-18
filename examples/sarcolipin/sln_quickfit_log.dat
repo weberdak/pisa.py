@@ -1,0 +1,64 @@
+# Job executed using pisa.py
+# Version: 1.0
+# Last revision: Nov 17 2019
+# The following geometric parameters will be used:
+# --aCaCN 117.5
+# --aCNCa 124.0
+# --aNCaC 107.4
+# --aCaNH 116.0
+# --bCaC 1.52
+# --bCN 1.35
+# --bNCa 1.45
+# --phi -63.0
+# --psi -42.0
+# --beta 17.0
+# --period 3.6
+# Neither --seq or --peaks specified. Generating 18 residues.
+# Sequence starts at residue: 1
+# Rho indices referenced to residue: 1
+# Computed Matrix A as:
+# [-0.82014914  0.56247172 -0.10479004]
+# [ 0.57177312  0.79910047 -0.1857793 ]
+# [-0.02075784 -0.21228286 -0.97698777]
+# Exploring combinations of tau and order for best fit to bounds specified.
+# Minimum chemical shift: 77.4.
+# Maximum chemical shift: 101.2.
+# Minimum dipolar coupling: 2.0.
+# Maximum dipolar coupling: 4.5.
+# --fit_tau [0.0, 90.0, 1.0]
+# --fit_order [0.0, 1.0, 0.01]
+# 91 values of tau will be tested.
+# 101 values of order parameters be tested.
+# A total of 9191 combinations will be tested.
+# Fitting completed in 0.07 minutes (4.12 seconds).
+# Writing score for each combination to: sln_quickfit_fit.dat
+# Minimum score: 3.036
+# Fitted tau: 24.000
+# Fitted order: 0.880
+# Simulating PISA wheel with the following parameters:
+# --flip 90.0
+# --dc 10.735
+# --pas (57.3, 81.2, 228.1)
+# --tau 24.00
+# --rho0 0.00
+# --order 0.88
+# resname, index, rho, shift_calc, coupling_calc, shift_exp, coupling_exp, score, shift_raw, coupling_raw
+1 0 0.00 89.710 4.542 nan nan 0.000 nan nan
+2 1 260.00 98.975 2.730 nan nan 0.000 nan nan
+3 2 160.00 87.150 2.034 nan nan 0.000 nan nan
+4 3 60.00 79.277 4.004 nan nan 0.000 nan nan
+5 4 320.00 96.865 4.064 nan nan 0.000 nan nan
+6 5 220.00 95.654 2.066 nan nan 0.000 nan nan
+7 6 120.00 81.051 2.665 nan nan 0.000 nan nan
+8 7 20.00 85.489 4.528 nan nan 0.000 nan nan
+9 8 280.00 99.451 3.180 nan nan 0.000 nan nan
+10 9 180.00 90.315 1.904 nan nan 0.000 nan nan
+11 10 80.00 78.341 3.574 nan nan 0.000 nan nan
+12 11 340.00 93.712 4.379 nan nan 0.000 nan nan
+13 12 240.00 97.631 2.346 nan nan 0.000 nan nan
+14 13 140.00 83.928 2.295 nan nan 0.000 nan nan
+15 14 40.00 81.792 4.339 nan nan 0.000 nan nan
+16 15 300.00 98.801 3.645 nan nan 0.000 nan nan
+17 16 200.00 93.187 1.915 nan nan 0.000 nan nan
+18 17 100.00 79.028 3.108 nan nan 0.000 nan nan
+# Writing interpolated wave data to: sln_quickfit_wave.dat

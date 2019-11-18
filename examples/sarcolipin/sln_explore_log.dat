@@ -1,0 +1,81 @@
+# Job executed using pisa.py
+# Version: 1.0
+# Last revision: Nov 17 2019
+# The following geometric parameters will be used:
+# --aCaCN 117.5
+# --aCNCa 124.0
+# --aNCaC 107.4
+# --aCaNH 116.0
+# --bCaC 1.52
+# --bCN 1.35
+# --bNCa 1.45
+# --phi -63.0
+# --psi -42.0
+# --beta 17.0
+# --period 3.6
+# Importing sequence: MGINTRELFLNFTIVLITVILMWLLVRSYQY
+# Sequence starts at residue: 1
+# Rho indices referenced to residue: 6
+# Importing sequence and data from file: assignments.dat
+# Rho indices referenced to residue: 6
+# Computed Matrix A as:
+# [-0.82014914  0.56247172 -0.10479004]
+# [ 0.57177312  0.79910047 -0.1857793 ]
+# [-0.02075784 -0.21228286 -0.97698777]
+# Exploring combinations of tau, rho0 and order for best fit to peak list.
+# --fit_tau [20.0, 30.0, 0.2]
+# --fit_rho0 [35.0, 55.0, 1.0]
+# --fit_order [0.8, 1.0, 0.02]
+# 51 values of tau will be tested.
+# 21 values of rho0 will be tested.
+# 11 values of order parameters be tested.
+# A total of 11781 combinations will be tested.
+# 32 CPUs will be used.
+# --fit_exclude [1, 3, 6, 7, 8, 9, 10, 11, 12, 13, 28, 29, 31]
+# Residues to fit: ['I14', 'V15', 'L16', 'I17', 'T18', 'V19', 'I20', 'L21', 'M22', 'W23', 'L24', 'L25', 'V26', 'R27']
+# Writing score for each combination to: sln_explore_fit.dat
+# Minimum score: 35.301
+# Fitted tau: 24.600
+# Fitted rho0: 46.000
+# Fitted order: 0.900
+# Fitting completed in 0.12 minutes (7.10 seconds).
+# Simulating PISA wheel with the following parameters:
+# --flip 90.0
+# --dc 10.735
+# --pas (57.3, 81.2, 228.1)
+# --tau 24.60
+# --rho0 46.00
+# --order 0.90
+# resname, index, rho, shift_calc, coupling_calc, shift_exp, coupling_exp, score, shift_raw, coupling_raw
+M1 -5 186.00 91.078 1.861 nan nan 0.000 nan nan
+G2 -4 86.00 77.683 3.466 nan nan 0.000 nan nan
+I3 -3 346.00 92.513 4.520 135.499 1.348 74.708 92.647 2.996
+N4 -2 246.00 98.223 2.442 nan nan 0.000 nan nan
+T5 -1 146.00 84.498 2.184 nan nan 0.000 nan nan
+R6 0 46.00 80.285 4.318 nan nan 0.000 nan nan
+E7 1 306.00 98.529 3.823 nan nan 0.000 nan nan
+L8 2 206.00 93.932 1.916 94.699 1.011 9.821 183.313 2.247
+F9 3 106.00 78.878 2.981 80.834 2.624 5.529 214.124 5.831
+L10 4 6.00 88.182 4.637 101.172 4.048 18.878 168.929 8.996
+N11 5 266.00 99.390 2.867 108.467 2.429 13.456 152.718 5.398
+F12 6 166.00 87.870 1.952 86.527 1.813 2.735 201.473 4.029
+T13 7 66.00 78.128 3.933 77.984 3.943 0.247 220.458 8.762
+I14 8 326.00 96.120 4.235 101.172 4.048 6.917 168.929 8.996
+V15 9 226.00 96.344 2.115 97.199 2.116 0.862 177.758 4.702
+L16 10 126.00 81.329 2.538 78.544 2.753 4.932 219.213 6.118
+I17 11 26.00 83.846 4.566 83.056 4.483 1.617 209.187 9.962
+T18 12 286.00 99.580 3.346 99.822 3.357 0.349 171.929 7.460
+V19 13 186.00 91.078 1.861 89.691 1.953 2.310 194.442 4.340
+I20 14 86.00 77.683 3.466 77.359 3.494 0.605 221.847 7.764
+L21 15 346.00 92.513 4.520 93.226 4.536 0.870 186.587 10.080
+M22 16 246.00 98.223 2.442 98.304 2.661 2.273 175.302 5.913
+W23 17 146.00 84.498 2.184 85.096 2.211 0.864 204.653 4.913
+L24 18 46.00 80.285 4.318 80.493 3.964 3.750 214.882 8.809
+L25 19 306.00 98.529 3.823 101.172 4.048 4.889 168.929 8.996
+V26 20 206.00 93.932 1.916 94.381 2.116 2.445 184.020 4.702
+R27 21 106.00 78.878 2.981 78.544 2.753 2.617 219.213 6.118
+S28 22 6.00 88.182 4.637 83.277 4.144 9.833 208.696 9.209
+Y29 23 266.00 99.390 2.867 114.132 1.075 32.661 140.129 2.389
+Q30 24 166.00 87.870 1.952 nan nan 0.000 nan nan
+Y31 25 66.00 78.128 3.933 110.256 1.606 55.395 148.742 3.569
+# Writing interpolated wave data to: sln_explore_wave.dat

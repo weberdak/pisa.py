@@ -37,7 +37,7 @@ def readXYZ(infile):
     '''
     x = np.genfromtxt(infile,usecols=(0),dtype=float)
     y = np.genfromtxt(infile,usecols=(1),dtype=float)
-    z = np.genfromtxt(infile,usecols=(3),dtype=float)
+    z = np.genfromtxt(infile,usecols=(2),dtype=float)
     return (x,y,z)
     
 
@@ -63,7 +63,7 @@ def limits(data):
     return min(data),max(data)
 
 # Read data, normalize and convert to grid
-x0,y0,z0 = readXYZ('pisa_fit.dat')
+x0,y0,z0 = readXYZ('sln_quickfit_fit.dat')
 min_x0,max_x0 = limits(x0)
 min_y0,max_y0 = limits(y0)
 min_z0,max_z0 = limits(z0)
@@ -91,17 +91,17 @@ ax.w_yaxis.pane.fill = False
 ax.w_zaxis.pane.fill = False
 
 ax.set_xlim(0,90)
-ax.set_ylim(0,360)
+ax.set_ylim(0,1.0)
 ax.set_zlim(0,1.00)
 ax.set_xlabel('Tilt angle ($\\tau$,$^\circ$)',size=10)
-ax.set_ylabel('Rotation angle ($\\rho$$_{R6}$,$^\circ$)',size=10)
+ax.set_ylabel('Order parameter',size=10)
 ax.set_zlabel('Normalized fit score',size=10)
 plt.xticks(fontsize=8)
 plt.yticks(fontsize=8)
 ax.xaxis.set_ticks(np.arange(0, 91, 10))
-ax.yaxis.set_ticks(np.arange(0, 361, 45))
+ax.yaxis.set_ticks(np.arange(0, 1.0, 0.1))
 for t in ax.zaxis.get_major_ticks(): t.label.set_fontsize(6)
 
 plt.tight_layout()
-plt.savefig('plot_wire.jpg',dpi=300)
+plt.savefig('sln_quickfit_wire.jpg',dpi=300)
 plt.show()

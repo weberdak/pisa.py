@@ -3,9 +3,9 @@ import nmrglue as ng
 import numpy as np
 
 # Specify results files
-spectrum = 'PISEMA.ft'
-log_file = 'pisa_log.dat'
-wave_file = 'pisa_wave.dat'
+spectrum = 'hcsesampi4.ft'
+log_file = 'sln_quickfit_log.dat'
+wave_file = 'sln_quickfit_wave.dat'
 
 # Read spectrum with nmrglue
 dic,data = ng.pipe.read(spectrum)
@@ -14,7 +14,7 @@ dic,data = ng.pipe.read(spectrum)
 lx, ly = zip(*np.genfromtxt(wave_file,usecols=(2,3),dtype=float))
 
 # Set contour levels
-contour_start = 175000 # Baseline
+contour_start = 144214*5 # Baseline
 contour_num = 30 # number of contour levels
 contour_factor = 1.1 # scaling factor between contour levels
 levels = contour_start*contour_factor**np.arange(contour_num) 
@@ -41,17 +41,7 @@ ax.set_ylabel('$^{15}$N-$^{1}$H DC (kHz)',size=10)
 # Plot line
 ax.plot(lx, ly, c='darkred',alpha=1,linewidth=0.5)
 
-# Plot points
-xc,yc = zip(*np.genfromtxt(log_file,usecols=(3,4),dtype=float))
-names = np.genfromtxt(log_file,usecols=(0),dtype=str)
-ax.scatter(xc,yc,c='darkred',alpha=1)
-
-# Text labels
-texts = []
-for x,y,s in zip(xc,yc,names):
-    texts.append(ax.text(x,y,s,size=6,color='darkred'))
-
 plt.tight_layout()
-plt.savefig('sln_overlay.jpg',dpi=300)
+plt.savefig('sln_quickfit_overlay.jpg',dpi=300)
 plt.show()
 

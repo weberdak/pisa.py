@@ -1,0 +1,100 @@
+# Job executed using pisa.py
+# Version: 1.0
+# Last revision: Nov 17 2019
+# The following geometric parameters will be used:
+# --aCaCN 117.5
+# --aCNCa 124.0
+# --aNCaC 107.4
+# --aCaNH 116.0
+# --bCaC 1.52
+# --bCN 1.35
+# --bNCa 1.45
+# --phi -63.0
+# --psi -42.0
+# --beta 17.0
+# --period 3.6
+# Importing sequence: MGINTRELFLNFTIVLITVILMWLLVRSYQY
+# Sequence starts at residue: 1
+# Rho indices referenced to residue: 6
+# Importing sequence and data from file: assignments.dat
+# Rho indices referenced to residue: 6
+# Computed Matrix A as:
+# [-0.82014914  0.56247172 -0.10479004]
+# [ 0.57177312  0.79910047 -0.1857793 ]
+# [-0.02075784 -0.21228286 -0.97698777]
+# Exploring combinations of tau, rho0 and order for best fit to peak list.
+# --fit_tau [20.0, 30.0, 0.2]
+# --fit_rho0 [35.0, 55.0, 1.0]
+# --fit_order [0.8, 1.0, 0.02]
+# 51 values of tau will be tested.
+# 21 values of rho0 will be tested.
+# 11 values of order parameters be tested.
+# A total of 11781 combinations will be tested.
+# 32 CPUs will be used.
+# --fit_exclude [1, 3, 6, 7, 8, 9, 10, 11, 12, 13, 28, 29, 31]
+# Residues to fit: ['I14', 'V15', 'L16', 'I17', 'T18', 'V19', 'I20', 'L21', 'M22', 'W23', 'L24', 'L25', 'V26', 'R27']
+# Performing error analysis using 20 replicates with 1.6 ppm and 0.3 kHz linewidths.
+# Replicate 1: tau = 25.00, rho0 = 42.00, ord = 0.90, score = 76.751
+# Replicate 2: tau = 25.20, rho0 = 42.00, ord = 0.90, score = 77.426
+# Replicate 3: tau = 24.40, rho0 = 39.00, ord = 0.88, score = 52.043
+# Replicate 4: tau = 24.00, rho0 = 48.00, ord = 0.88, score = 54.617
+# Replicate 5: tau = 24.00, rho0 = 45.00, ord = 0.90, score = 61.082
+# Replicate 6: tau = 23.20, rho0 = 39.00, ord = 0.86, score = 55.143
+# Replicate 7: tau = 24.00, rho0 = 46.00, ord = 0.92, score = 68.300
+# Replicate 8: tau = 25.00, rho0 = 52.00, ord = 0.94, score = 60.345
+# Replicate 9: tau = 25.40, rho0 = 53.00, ord = 0.92, score = 74.989
+# Replicate 10: tau = 26.00, rho0 = 45.00, ord = 0.94, score = 59.663
+# Replicate 11: tau = 24.00, rho0 = 46.00, ord = 0.88, score = 61.305
+# Replicate 12: tau = 26.00, rho0 = 47.00, ord = 0.92, score = 68.448
+# Replicate 13: tau = 24.60, rho0 = 47.00, ord = 0.90, score = 54.470
+# Replicate 14: tau = 24.60, rho0 = 50.00, ord = 0.92, score = 49.404
+# Replicate 15: tau = 26.20, rho0 = 45.00, ord = 0.94, score = 59.175
+# Replicate 16: tau = 25.00, rho0 = 45.00, ord = 0.92, score = 67.704
+# Replicate 17: tau = 24.60, rho0 = 49.00, ord = 0.90, score = 69.261
+# Replicate 18: tau = 26.00, rho0 = 40.00, ord = 0.92, score = 48.420
+# Replicate 19: tau = 22.00, rho0 = 43.00, ord = 0.86, score = 72.139
+# Replicate 20: tau = 25.00, rho0 = 44.00, ord = 0.94, score = 69.184
+# Average tau: 24.71 +/- 1.00
+# Average rho0: 45.35 +/- 3.81
+# Average ord: 0.91 +/- 0.02
+# Fitting completed in 2.48 minutes (148.88 seconds).
+# Simulating PISA wheel with the following parameters:
+# --flip 90.0
+# --dc 10.735
+# --pas (57.3, 81.2, 228.1)
+# --tau 24.71
+# --rho0 45.35
+# --order 0.91
+# resname, index, rho, shift_calc, coupling_calc, shift_exp, coupling_exp, score, shift_raw, coupling_raw
+M1 -5 185.35 90.842 1.862 nan nan 0.000 nan nan
+G2 -4 85.35 77.379 3.500 nan nan 0.000 nan nan
+I3 -3 345.35 92.530 4.544 135.499 1.348 74.925 92.875 2.972
+N4 -2 245.35 98.107 2.436 nan nan 0.000 nan nan
+T5 -1 145.35 84.183 2.198 nan nan 0.000 nan nan
+R6 0 45.35 80.120 4.357 nan nan 0.000 nan nan
+E7 1 305.35 98.533 3.831 nan nan 0.000 nan nan
+L8 2 205.35 93.737 1.913 94.699 1.011 9.987 182.842 2.229
+F9 3 105.35 78.542 3.010 80.834 2.624 6.147 213.415 5.786
+L10 4 5.35 88.161 4.667 101.172 4.048 19.205 168.568 8.926
+N11 5 265.35 99.316 2.863 108.467 2.429 13.493 152.482 5.356
+F12 6 165.35 87.591 1.959 86.527 1.813 2.528 200.862 3.998
+T13 7 65.35 77.885 3.970 77.984 3.943 0.373 219.699 8.695
+I14 8 325.35 96.144 4.250 101.172 4.048 7.044 168.568 8.926
+V15 9 225.35 96.188 2.110 97.199 2.116 1.071 177.329 4.666
+L16 10 125.35 80.992 2.560 78.544 2.753 4.382 218.465 6.071
+I17 11 25.35 83.761 4.602 83.056 4.483 1.891 208.515 9.885
+T18 12 285.35 99.548 3.347 99.822 3.357 0.373 171.545 7.402
+V19 13 185.35 90.842 1.862 89.691 1.953 2.060 193.885 4.307
+I20 14 85.35 77.379 3.500 77.359 3.494 0.080 221.078 7.705
+L21 15 345.35 92.530 4.544 93.226 4.536 0.772 186.090 10.002
+M22 16 245.35 98.107 2.436 98.304 2.661 2.446 174.892 5.868
+W23 17 145.35 84.183 2.198 85.096 2.211 1.041 204.017 4.875
+L24 18 45.35 80.120 4.357 80.493 3.964 4.299 214.167 8.741
+L25 19 305.35 98.533 3.831 101.172 4.048 4.813 168.568 8.926
+V26 20 205.35 93.737 1.913 94.381 2.116 2.669 183.543 4.666
+R27 21 105.35 78.542 3.010 78.544 2.753 2.567 218.465 6.071
+S28 22 5.35 88.161 4.667 83.277 4.144 10.118 208.028 9.138
+Y29 23 265.35 99.316 2.863 114.132 1.075 32.698 139.991 2.370
+Q30 24 165.35 87.591 1.959 nan nan 0.000 nan nan
+Y31 25 65.35 77.885 3.970 110.256 1.606 56.015 148.537 3.541
+# Writing interpolated wave data to: sln_explore_errs_wave.dat

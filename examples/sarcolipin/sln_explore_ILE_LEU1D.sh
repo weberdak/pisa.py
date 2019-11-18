@@ -1,0 +1,12 @@
+python ../../pisa.py \
+       --peaks assignments_ILE_LEU1D.dat \
+       --seq MGINTRELFLNFTIVLITVILMWLLVRSYQY \
+       --flip 90.0 \
+       --rho_start 6 \
+       --fit_tau 15.0 35.0 0.2 \
+       --fit_rho0 30.0 50.0 1.0 \
+       --fit_order 0.80 1.0 0.02 \
+       --explore \
+       --errors 20 1.6 0.3 \
+       --out_log sln_explore_ILE_LEU1D_log.dat \
+       --out_wave sln_explore_ILE_LEU1D_wave.dat
