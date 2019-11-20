@@ -3,12 +3,12 @@ import numpy as np
 import matplotlib.gridspec as gridspec
 
 # Read in points for line
-line_file_1 = 'pisa_wave.dat'
+line_file_1 = 'sln_explore_wave.dat'
 line_data_1 = np.genfromtxt(line_file_1,usecols=(0,2,3),dtype=float)
 line_x_1, line_y_1, line_z_1 = zip(*line_data_1)
 
 # Read points of PISA simulations
-sim_file_1 = 'pisa_log.dat'
+sim_file_1 = 'sln_explore_log.dat'
 sim_x_1 = np.genfromtxt(sim_file_1,usecols=(1),dtype=int)
 sim_y_1, sim_z_1 = zip(*np.genfromtxt(sim_file_1,usecols=(5,6),dtype=float))
 rho_start = 6

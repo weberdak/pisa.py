@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 VERSION='1.0'
-REVISION='Nov 17 2019'
+REVISION='Nov 20 2019'
 
 
 import pandas as pd
@@ -23,7 +23,7 @@ def initData():
 
 
 def initFromSequence(df,seq,nres,seq_start,rho_start):
-    '''Initilize residue names into dataframe by input sequence.
+    '''Initialize residue names into dataframe by input sequence.
     
     Parameters
     ----------
@@ -105,11 +105,11 @@ def filterData(df,resnums,rho_start,exclude=False,include=False):
     resnums: list of ints
        List of residue numbers to strip or keep.
     rho_start: int
-       Residue the indices are referenced to zero.
+       This residue number is indexed to zero in PISA calculations.
     exclude: bool
-       Specify to exclude specified residue numbers from dataframe
+       Remove these residue numbers from dataframe
     include: bool
-       Specify to keep only specified residue numbers in dataframe
+       Keep only these residues numbers in the dataframe
     
     Returns
     -------
@@ -129,24 +129,24 @@ def filterData(df,resnums,rho_start,exclude=False,include=False):
 
 
 def calcShiftCoupling(tau,rho,order,flip,pas,beta,dc,matrixA):
-    '''Compute 15N shift and 15N-1H dipolar coupling for residue.
+    '''Compute the 15N shift and 15N-1H dipolar coupling for residue.
     
     Parameters
     ----------
     tau: float
         Helix tilt angle (radians).
     rho: float
-        Azimuthal angle of residue (radians).
+        Azimuthal angle of this residue (radians).
     order: float
-        Global order parameter (0 to 1).
+        Order parameter (0 to 1).
     flip: float
-        Flip angle of membrane (radians).
+        Flip angle of membrane normal to magnetic field (radians).
     pas: list of three floats
-        15N principle axis system (ppm).
+        15N principal axis system (ppm).
     beta: float
-        Second polar angle relating 15N PAS to NH dipolar vector.
+        Second polar angle relating the 15N PAS to NH dipolar vector.
     dc: float
-        Full NH dipolar coupling.
+        Full 15N-1H dipolar coupling.
     matrixA: numpy array
         Matrix relating peptide structure to helical axis.
 
@@ -168,8 +168,8 @@ def calcShiftCoupling(tau,rho,order,flip,pas,beta,dc,matrixA):
 
 
 def calcMatrixA(phi,psi,beta,aCaCN,aCNCa,aNCaC,aCaNH,bCaC,bCN,bNCa):
-    '''Derive Matrix A relating helical axis frame (HAF) with
-    15N principle axis frame (PAF).
+    '''Derive Matrix A relating helical axis frame (HAF) to
+    15N principal axis frame (PAF).
     
     Parameters
     ----------
@@ -247,7 +247,7 @@ def calcWheel(df,tau,rho0,period,order,flip,pas,beta,dc,matrixA):
     Parameters
     ----------
     df: Pandas dataframe
-        An initialized dataframe for sequence.
+        An initialized dataframe for the sequence.
     rho0: float
         Azimuthal angle of reference residue (radians).
     period: float
@@ -272,7 +272,7 @@ def calcWheel(df,tau,rho0,period,order,flip,pas,beta,dc,matrixA):
 
 
 def calcWave(df,tau,rho0,period,order,flip,pas,beta,dc,rho_start,matrixA,margin=5.0,increment=0.1):
-    '''Compute continuous (interpolated) wheel for data.
+    '''Compute continuous (interpolated) wheel of PISA data points.
 
     Parameters
     ----------
@@ -608,57 +608,57 @@ def parse_args():
     )
     parser.add_argument(
         '-o','--order', type=float,
-        help='General order parameter (1.0).',
+        help='Order parameter (1.0).',
         default=1.0
     )
     parser.add_argument(
         '--phi', type=float,
-        help='Phi dihedral angle for ideal helix in degrees (-63.0).',
+        help='Phi dihedral angle for an ideal helix in degrees (-63.0).',
         default=-63.0
     )
     parser.add_argument(
         '--psi', type=float,
-        help='Psi dihedral angle for ideal helix in degrees (-42.0).',
+        help='Psi dihedral angle for an ideal helix in degrees (-42.0).',
         default=-42.0
     )
     parser.add_argument(
         '--beta', type=float,
-        help='Beta rotation for PAS with respect to amide plane in degrees (17.0).',
+        help='Beta rotation of the 15N PAS with respect to the amide plane in degrees (17.0).',
         default=17.0
     )
     parser.add_argument(
         '--dc', type=float,
-        help='Maximum NH dipolar coupling (10.735).',
+        help='Maximum 15N-1H dipolar coupling in kHz (10.735).',
         default=10.735
     )
     parser.add_argument(
         '--pas', type=float, nargs='+',
-        help='N15 principle axis system in ppm (57.3 81.2 228.1).',
+        help='N15 principal axis system components in ppm (57.3 81.2 228.1).',
         default=(57.3,81.2,228.1)
     )
     parser.add_argument(
         '-s','--seq', type=str,
-        help='Amino acid sequence of protein segment of interest (none).',
+        help='Single-letter amino acid sequence of the protein (none).',
         default=''
     )
     parser.add_argument(
         '--seq_start', type=int,
-        help='Starting residue number of sequence (1).',
+        help='Starting residue number in the sequence (1).',
         default=1
     )
     parser.add_argument(
         '--rho_start', type=int,
-        help='Residue to reference rho (1).',
+        help='Residue number to reference as zero in all PISA calculations. I.e., residue of rho0 angle (1).',
         default=1
     )
     parser.add_argument(
         '-n','--nres', type=int,
-        help='Number of residues (18 or length of --seq)',
+        help='Number of residues to simulate (18 or determined from --seq)',
         default=18
     )
     parser.add_argument(
         '--flip', type=float,
-        help='Angle of membrane to B0 in degrees (0.0).',
+        help='Angle of membrane normal to magnetic field in degrees (0.0).',
         default=0.0
     )
     parser.add_argument(
@@ -668,7 +668,7 @@ def parse_args():
     )
     parser.add_argument(
         '--negative_dc',
-        help='Output all dipolar couplings as negtive values in output files.',
+        help='Output all dipolar couplings as negative values in output files.',
         action='store_true'
     )
     parser.add_argument(
@@ -708,32 +708,32 @@ def parse_args():
     )
     parser.add_argument(
         '-f','--peaks', type=str,
-        help='Peak list file to fit.',
+        help='Input peak list file.',
         default=''
     )
     parser.add_argument(
         '--quickfit', nargs='+',
-        help='Min. shift, max. shift, min. couple, max. couple. Explore combinations of tau and order for best fit bounds.',
+        help='Min. CS, max. CS, min. DC, max. DC. Explore combinations of tau angles and order parameters to best fit these bounds.',
         default=[]
     )
     parser.add_argument(
         '--explore',
-        help='Specify to explore combinations of tau, rho0 and order for best fit.',
+        help='Specify to explore combinations of tau, rho0 and order to best fit input peak list.',
         action='store_true'
     )
     parser.add_argument(
         '--fit_tau', type=float, nargs='+',
-        help='Min., max. and step to fit tilt angle (0.0 90.0 1.0).',
+        help='Min., max. and step to fit the tilt angle (0.0 90.0 1.0).',
         default=(0.0,90.0,1.0)
     )
     parser.add_argument(
         '--fit_rho0', type=float, nargs='+',
-        help='Min., max. and step to fit azimuthal angle (0.0 360.0 4.0).',
+        help='Min., max. and step to fit the azimuthal angle (0.0 360.0 4.0).',
         default=(0.0,360.0,4.0)
     )
     parser.add_argument(
         '--fit_order', type=float, nargs='+',
-        help='Min., max. and step to fit order parameter (0.85 0.85 0.1).',
+        help='Min., max. and step to fit the order parameter (0.85 0.85 0.1).',
         default=(0.85, 0.85, 0.1)
     )
     parser.add_argument(
@@ -758,27 +758,27 @@ def parse_args():
     )
     parser.add_argument(
         '--out_log', type=str,
-        help='Filename to save log file with per-residue shifts and couplings (pisa_log.dat).',
+        help='File name/path of output log file (pisa_log.dat).',
         default='pisa_log.dat'
     )
     parser.add_argument(
         '--out_wave', type=str,
-        help='Filename to save continuous wheel of simulated shifts and couplings (pisa_wave.dat).',
+        help='File name/path of output wave file (pisa_wave.dat).',
         default='pisa_wave.dat'
     )
     parser.add_argument(
         '--out_fit', type=str,
-        help='Filename to save fit score for every tau, rho0 and order tested (pisa_fit.dat).',
+        help='File name/path of output fit file (pisa_fit.dat).',
         default='pisa_fit.dat'
     )
     parser.add_argument(
         '--errors', type=float, nargs='+',
-        help='Error analysis. Specify three numbers: number of replicates (int),  average linewidth of CS (ppm) and average linewidth of DC (kHz).',
+        help='Peroform error analysis for explore function. Specify three numbers: # replicates (int),  avg. linewidths in CS (ppm) and DC (kHz) dimensions.',
         default=[]
     )
     parser.add_argument(
         '--procs', type=int,
-        help='Number of CPUs (32).',
+        help='Number of CPUs to use in explore and quickfit functions (32).',
         default=32
     )
     args = parser.parse_args()
