@@ -593,7 +593,7 @@ def is_float(s):
 
 
 def parse_args():
-    parser = argparse.ArgumentParser(description='Compute and fit PISA wheels for OS-ssNMR.',
+    parser = argparse.ArgumentParser(description='A python tool for simulating and fitting PISA wheels to oriented solid-state NMR data.',
                                      formatter_class=argparse.RawTextHelpFormatter)
 
     parser.add_argument(
@@ -773,7 +773,7 @@ def parse_args():
     )
     parser.add_argument(
         '--errors', type=float, nargs='+',
-        help='Peroform error analysis for explore function. Specify three numbers: # replicates (int),  avg. linewidths in CS (ppm) and DC (kHz) dimensions.',
+        help='Peroform error analysis for explore function. Specify three numbers: number of replicates (int),  avg. linewidths in CS (ppm) and DC (kHz) dimensions.',
         default=[]
     )
     parser.add_argument(

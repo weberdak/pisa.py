@@ -8,8 +8,7 @@ Manuscript in preparation.
 
 ### Graphical User Interface
 
-The PISA-SPARKY GUI plugin for this script is now availlable in the latest release of [NMRFAM-SPARKY](http://pine.nmrfam.wisc.edu/download_packages.html).
-
+The PISA-SPARKY GUI plugin for this script is now available in the latest release of [NMRFAM-SPARKY](http://pine.nmrfam.wisc.edu/download_packages.html).
 
 ### Installation
 
@@ -26,43 +25,43 @@ The [Nmrglue](http://nmrglue.readthedocs.io/en/latest/install.html) python libra
 	python pisa.py -h
 
 	usage: pisa.py [-h] [-t TAU] [-r RHO0] [-o ORDER] [--phi PHI] [--psi PSI]
-               [--beta BETA] [--dc DC] [--pas PAS [PAS ...]] [-s SEQ]
-               [--seq_start SEQ_START] [--rho_start RHO_START] [-n NRES]
-               [--flip FLIP] [--period PERIOD] [--negative_dc] [--aCaCN ACACN]
-               [--aCNCa ACNCA] [--aNCaC ANCAC] [--aCaNH ACANH] [--bCaC BCAC]
-               [--bCN BCN] [--bNCa BNCA] [-f PEAKS]
-               [--quickfit QUICKFIT [QUICKFIT ...]] [--explore]
-               [--fit_tau FIT_TAU [FIT_TAU ...]]
-               [--fit_rho0 FIT_RHO0 [FIT_RHO0 ...]]
-               [--fit_order FIT_ORDER [FIT_ORDER ...]] [--scalar SCALAR]
-               [--fit_only FIT_ONLY [FIT_ONLY ...]]
-               [--fit_exclude FIT_EXCLUDE [FIT_EXCLUDE ...]]
-               [--show_only SHOW_ONLY [SHOW_ONLY ...]] [--out_log OUT_LOG]
-               [--out_wave OUT_WAVE] [--out_fit OUT_FIT]
-               [--errors ERRORS [ERRORS ...]] [--procs PROCS]
-
-	Compute and fit PISA wheels for OS-ssNMR.
-
+	               [--beta BETA] [--dc DC] [--pas PAS [PAS ...]] [-s SEQ]
+	               [--seq_start SEQ_START] [--rho_start RHO_START] [-n NRES]
+	               [--flip FLIP] [--period PERIOD] [--negative_dc] [--aCaCN ACACN]
+	               [--aCNCa ACNCA] [--aNCaC ANCAC] [--aCaNH ACANH] [--bCaC BCAC]
+	               [--bCN BCN] [--bNCa BNCA] [-f PEAKS]
+	               [--quickfit QUICKFIT [QUICKFIT ...]] [--explore]
+	               [--fit_tau FIT_TAU [FIT_TAU ...]]
+	               [--fit_rho0 FIT_RHO0 [FIT_RHO0 ...]]
+	               [--fit_order FIT_ORDER [FIT_ORDER ...]] [--scalar SCALAR]
+	               [--fit_only FIT_ONLY [FIT_ONLY ...]]
+	               [--fit_exclude FIT_EXCLUDE [FIT_EXCLUDE ...]]
+	               [--show_only SHOW_ONLY [SHOW_ONLY ...]] [--out_log OUT_LOG]
+	               [--out_wave OUT_WAVE] [--out_fit OUT_FIT]
+	               [--errors ERRORS [ERRORS ...]] [--procs PROCS]
+	
+	A python tool for simulating and fitting PISA wheels to oriented solid-state NMR data.
+	
 	optional arguments:
 	  -h, --help            show this help message and exit
 	  -t TAU, --tau TAU     Helical tilt angle in degrees (20.0).
 	  -r RHO0, --rho0 RHO0  Azimuthal angle of reference residue (0.0).
 	  -o ORDER, --order ORDER
-                        General order parameter (1.0).
-	  --phi PHI             Phi dihedral angle for ideal helix in degrees (-63.0).
-	  --psi PSI             Psi dihedral angle for ideal helix in degrees (-42.0).
-	  --beta BETA           Beta rotation for PAS with respect to amide plane in degrees (17.0).
-	  --dc DC               Maximum NH dipolar coupling (10.735).
-	  --pas PAS [PAS ...]   N15 principle axis system in ppm (57.3 81.2 228.1).
- 	 -s SEQ, --seq SEQ     Amino acid sequence of protein segment of interest (none).
+	                        Order parameter (1.0).
+	  --phi PHI             Phi dihedral angle for an ideal helix in degrees (-63.0).
+	  --psi PSI             Psi dihedral angle for an ideal helix in degrees (-42.0).
+	  --beta BETA           Beta rotation of the 15N PAS with respect to the amide plane in degrees (17.0).
+	  --dc DC               Maximum 15N-1H dipolar coupling in kHz (10.735).
+	  --pas PAS [PAS ...]   N15 principal axis system components in ppm (57.3 81.2 228.1).
+	  -s SEQ, --seq SEQ     Single-letter amino acid sequence of the protein (none).
 	  --seq_start SEQ_START
-                        Starting residue number of sequence (1).
+	                        Starting residue number in the sequence (1).
 	  --rho_start RHO_START
-                        Residue to reference rho (1).
-	  -n NRES, --nres NRES  Number of residues (18 or length of --seq)
-	  --flip FLIP           Angle of membrane to B0 in degrees (0.0).
+	                        Residue number to reference as zero in all PISA calculations. I.e., residue of rho0 angle (1).
+	  -n NRES, --nres NRES  Number of residues to simulate (18 or determined from --seq)
+	  --flip FLIP           Angle of membrane normal to magnetic field in degrees (0.0).
 	  --period PERIOD       Number of residues per helical rotation (3.6).
-	  --negative_dc         Output all dipolar couplings as negtive values in output files.
+	  --negative_dc         Output all dipolar couplings as negative values in output files.
 	  --aCaCN ACACN         Angle of Ca-C-N in degrees (117.5).
 	  --aCNCa ACNCA         Angle of C-N-Ca in degrees (124.0).
 	  --aNCaC ANCAC         Angle of N-Ca-C in degrees (107.4).
@@ -71,29 +70,29 @@ The [Nmrglue](http://nmrglue.readthedocs.io/en/latest/install.html) python libra
 	  --bCN BCN             Length of C-N bond in angstroms (1.35).
 	  --bNCa BNCA           Length of N-Ca bond in angstroms (1.45).
 	  -f PEAKS, --peaks PEAKS
-                        Peak list file to fit.
+	                        Input peak list file.
 	  --quickfit QUICKFIT [QUICKFIT ...]
-                        Min. shift, max. shift, min. couple, max. couple. Explore combinations of tau and order for best fit bounds.
-	  --explore             Specify to explore combinations of tau, rho0 and order for best fit.
+	                        Min. CS, max. CS, min. DC, max. DC. Explore combinations of tau angles and order parameters to best fit these bounds.
+	  --explore             Specify to explore combinations of tau, rho0 and order to best fit input peak list.
 	  --fit_tau FIT_TAU [FIT_TAU ...]
-                        Min., max. and step to fit tilt angle (0.0 90.0 1.0).
+                        	Min., max. and step to fit the tilt angle (0.0 90.0 1.0).
 	  --fit_rho0 FIT_RHO0 [FIT_RHO0 ...]
-                        Min., max. and step to fit azimuthal angle (0.0 360.0 4.0).
+                        	Min., max. and step to fit the azimuthal angle (0.0 360.0 4.0).
 	  --fit_order FIT_ORDER [FIT_ORDER ...]
-                        Min., max. and step to fit order parameter (0.85 0.85 0.1).
+                        	Min., max. and step to fit the order parameter (0.85 0.85 0.1).
 	  --scalar SCALAR       Value to scale up dipolar couplings to match chemical shift dispersion (10.0)
 	  --fit_only FIT_ONLY [FIT_ONLY ...]
-                        Only fit wheel to these residues (none).
+                        	Only fit wheel to these residues (none).
 	  --fit_exclude FIT_EXCLUDE [FIT_EXCLUDE ...]
-                        Exclude these residues from fitting (none).
+                        	Exclude these residues from fitting (none).
 	  --show_only SHOW_ONLY [SHOW_ONLY ...]
-                        Display only these residues in the output files (none).
-	  --out_log OUT_LOG     Filename to save log file with per-residue shifts and couplings (pisa_log.dat).
-	  --out_wave OUT_WAVE   Filename to save continuous wheel of simulated shifts and couplings (pisa_wave.dat).
-	  --out_fit OUT_FIT     Filename to save fit score for every tau, rho0 and order tested (pisa_fit.dat).
+                        	Display only these residues in the output files (none).
+	  --out_log OUT_LOG     File name/path of output log file (pisa_log.dat).
+	  --out_wave OUT_WAVE   File name/path of output wave file (pisa_wave.dat).
+	  --out_fit OUT_FIT     File name/path of output fit file (pisa_fit.dat).
 	  --errors ERRORS [ERRORS ...]
-                        Error analysis. Specify three numbers: number of replicates (int),  average linewidth of CS (ppm) and average linewidth of DC (kHz).
-	  --procs PROCS         Number of CPUs (32).
+                        	Peroform error analysis for explore function. Specify three numbers: number of replicates (int),  avg. linewidths in CS (ppm) and DC (kHz) dimensions.
+	  --procs PROCS         Number of CPUs to use in explore and quickfit functions (32).
 
 
 
