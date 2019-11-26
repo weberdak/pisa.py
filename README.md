@@ -8,7 +8,9 @@ Manuscript in preparation.
 
 ### Graphical User Interface
 
-The PISA-SPARKY GUI plugin for this script is now available in the latest release of [NMRFAM-SPARKY](http://pine.nmrfam.wisc.edu/download_packages.html).
+The PISA-SPARKY GUI plugin for this script, written by Woonghee Lee, is now available in the latest release of [NMRFAM-SPARKY](http://pine.nmrfam.wisc.edu/download_packages.html). A video tutorial for the plugin:
+
+[![Alt text](https://img.youtube.com/vi/NnwEhloDwQI/0.jpg)](https://www.youtube.com/watch?v=NnwEhloDwQI)
 
 ### Installation
 
