@@ -12,6 +12,8 @@ The PISA-SPARKY GUI plugin for this script, written by Woonghee Lee, is now avai
 
 [![Alt text](https://img.youtube.com/vi/NnwEhloDwQI/0.jpg)](https://www.youtube.com/watch?v=NnwEhloDwQI)
 
+The example data used for this tutorial can be downloaded here:  [Example_Sarcolipin.tar.gz](examples_sparky/Example_Sarcolipin.tar.gz).
+
 ### Installation
 
 #### Python 3
