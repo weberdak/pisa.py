@@ -2,27 +2,50 @@
 
 A python tool for simulating and fitting PISA wheels to oriented solid-state NMR data.
 
-### Citation
+This page is still under construction and will include more usage information over time. Meanwhile, users are encouraged to read the associated manuscript (see bottom of this page) and supplementary information for further details.
 
-Manuscript in preparation.
+## PISA-SPARKY Plugin
 
-### Graphical User Interface
+The [*pisa.py*](pisa.py) script is hosted on NMRFAM servers and can be used remotely from the PISA-SPARKY GUI plugin available with [NMRFAM-SPARKY](http://pine.nmrfam.wisc.edu/download_packages.html) as of Dec 2019. Usage of the GUI is highly recommended, although the [*pisa.py*](pisa.py) script can be used as a standalone command line tool as described in later sections.
 
-The PISA-SPARKY GUI plugin for this script, written by Woonghee Lee, is now available in the latest release of [NMRFAM-SPARKY](http://pine.nmrfam.wisc.edu/download_packages.html). A video tutorial for the plugin:
+### Video tutorial
+
+A video tutorial for the plugin is available on YouTube:
 
 [![Alt text](https://img.youtube.com/vi/NnwEhloDwQI/0.jpg)](https://www.youtube.com/watch?v=NnwEhloDwQI)
 
 The example data used for this tutorial can be downloaded from Zenodo [here](https://zenodo.org/record/3596955/files/sarcolipin_unflippedbicelle_pisa-sparky.zip?download=1).
 
-### Installation
+### Additional information
 
-#### Python 3
+#### Dipolar coupling restraints for Ponderosa
 
-The pisa.py script requires Python 3. An easy way to install Python 3 is by the [Anaconda Package](https://www.anaconda.com/distribution/), which includes all required libraries.
+The plugin has the function to generate dipolar coupling restraints for the structural calculations using the Ponderosa Server. Note that these restraints are identical to the format used by CYANA, although the user will have to manually specify the rhombicity and magnitude since values of 999 and 999 by default arbitrarily are not acceptable for CYANA.
 
-#### Nmrglue (optional)
+## Standalone usage 
 
-The [Nmrglue](http://nmrglue.readthedocs.io/en/latest/install.html) python library is recommended for producing overlaying results against spectra in NMRPipe or Sparky format.
+The following sections descibe how to use the *pisa.py* script as a standalone command-line tool. Users will require at least a basic working knowledge of Python.
+
+### System requirements
+
+To run the [*pisa.py*](pisa.py), users will need Python 3 installed and containing the follwing libraries:
+
+* pandas
+* numpy
+* math
+* itertools
+* argparse
+* time
+* random
+* concurrent.futures
+
+Visualization of results will require: 
+
+* [nmrglue](http://nmrglue.readthedocs.io/en/latest/install.html)
+* matplotlib
+
+Note that installing Python 3 using the [Anaconda](https://www.anaconda.com/distribution/) distrubution will satisfy all these dependancies except for [nmrglue](http://nmrglue.readthedocs.io/en/latest/install.html), which will need to be installed manually.
+
 
 ### Usage
 
@@ -237,3 +260,31 @@ As for the quickfit function, the explore may be used if only chemical shifts or
        --out_wave sln_explore_ILE_LEU1D_wave.dat
        
 This produce these log ([sln_explore_ILE_LEU1D_log.dat](examples/sarcolipin/sln_explore_ILE_LEU1D_log.dat)) and wave ([sln_explore_ILE_LEU1D_wave.dat](examples/sarcolipin/sln_explore_ILE_LEU1D_wave.dat)) files.
+
+
+## Acknowledgments
+
+#### Citation
+Please cite the following if using either the PISA-SPARKY GUI plugin or the pisa.py standalone script:
+
+Weber, D. K., Wang, S., Markley, J. L., Veglia, G., Lee, W. PISA-SPARKY: an interative SPARKY plugin to analyze oriented solid-state NMR spectra of helical membrane proteins. *Bionformatics*. Accepted.
+
+#### Contributions
+- The pisa.py script was written by Dr. Daniel K. Weber (University of Minnesota - Twin Cities, Veglia Group)
+- The PISA-SPARKY GUI was written by Dr. Woonghee Lee (Univerisity of Wisconsin - Madison, NMRFAM)
+
+#### Funding sources
+
+National Science Foundation:
+
+* DBI 1902076 (Lee, W & Markley, J. L.)
+
+National Institutes of Health: 
+
+* R01 GM 064742 (Veglia, G.)
+* R01 HL 144130 (Veglia, G.)
+* P41 GM 103399 (Markley, J. L.)
+
+American Heart Foundation:
+
+* 19POST34420009 (Weber, D. K.)
