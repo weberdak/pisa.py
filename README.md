@@ -20,7 +20,7 @@ The example data used for this tutorial can be downloaded from Zenodo [here](htt
 
 #### Dipolar coupling restraints for Ponderosa
 
-The plugin has the function to generate dipolar coupling restraints for the structural calculations using the Ponderosa Server. Note that these restraints are identical to the format used by CYANA, although the user will have to manually specify the rhombicity and magnitude since values of 999 and 999 by default arbitrarily are not acceptable for CYANA.
+The plugin has the function to generate dipolar coupling restraints for the structural calculations using the Ponderosa Server. Note that these restraints are identical to the format used by CYANA, although the user will have to manually specify the rhombicity and magnitude since values of 999 and 999 arbitrarily set by default are not acceptable for CYANA.
 
 ## Standalone usage 
 
