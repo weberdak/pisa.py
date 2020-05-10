@@ -28,7 +28,7 @@ The following sections descibe how to use the *pisa.py* script as a standalone c
 
 ### System requirements
 
-To run the [*pisa.py*](pisa.py), users will need Python 3 installed and containing the follwing libraries:
+To run the [*pisa.py*](pisa.py), users will need Python 3 installed and containing the following libraries:
 
 * pandas
 * numpy
@@ -267,7 +267,7 @@ This produce these log ([sln_explore_ILE_LEU1D_log.dat](examples/sarcolipin/sln_
 #### Citation
 Please cite the following if using either the PISA-SPARKY GUI plugin or the pisa.py standalone script:
 
-Weber, D. K., Wang, S., Markley, J. L., Veglia, G., Lee, W. PISA-SPARKY: an interative SPARKY plugin to analyze oriented solid-state NMR spectra of helical membrane proteins. *Bionformatics*. Accepted.
+Weber, D. K., Wang, S., Markley, J. L., Veglia, G., Lee, W. PISA-SPARKY: an interative SPARKY plugin to analyze oriented solid-state NMR spectra of helical membrane proteins. *Bionformatics*. https://doi.org/10.1093/bioinformatics/btaa019
 
 #### Contributions
 - The pisa.py script was written by Dr. Daniel K. Weber (University of Minnesota - Twin Cities, Veglia Group)
@@ -285,6 +285,6 @@ National Institutes of Health:
 * R01 HL 144130 (Veglia, G.)
 * P41 GM 103399 (Markley, J. L.)
 
-American Heart Foundation:
+American Heart Association:
 
 * 19POST34420009 (Weber, D. K.)
